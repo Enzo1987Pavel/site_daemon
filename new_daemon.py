@@ -10,6 +10,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
+# -----------------------------------------------------
+# -------- ЗАГРУЖАТЬ ФОТОГРАФИИ САМОМТОЯТЕЛЬНО --------
+# -----------------------------------------------------
 
 class SiteDaemon:  # Создаем класс демона 'SiteDaemon'
     def __init__(self):
