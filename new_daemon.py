@@ -14,6 +14,7 @@ from selenium.webdriver.chrome.options import Options
 # -------- ЗАГРУЖАТЬ ФОТОГРАФИИ САМОМТОЯТЕЛЬНО --------
 # -----------------------------------------------------
 
+
 class SiteDaemon:  # Создаем класс демона 'SiteDaemon'
     def __init__(self):
         self.running = True
