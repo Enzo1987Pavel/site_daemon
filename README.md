@@ -1,7 +1,7 @@
 ## Скрипт для заполнения форм объявления
 ###
 * ![version](https://img.shields.io/badge/Python-v_3.10-informational/?style=social&logo=Python)
-##
+###
 * Скрипт для заполнения форм объявления на сайте www.gde.ru 
 * Основной файл для исполнения `new_daemon.py`
 ##
