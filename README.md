@@ -1,5 +1,4 @@
 ## Скрипт для заполнения форм объявления
----
 * Скрипт для заполнения форм объявления на сайте www.gde.ru 
 ##
 * ![version](https://img.shields.io/badge/Python-v_3.10-informational/?style=social&logo=Python)
