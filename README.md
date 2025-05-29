@@ -1,9 +1,10 @@
 ## Скрипт для заполнения форм объявления
----
-![version](https://img.shields.io/badge/Python-v_3.10-informational/?style=social&logo=Python) [скачать необходимую версию Python](https://www.python.org/)
----
+
+####![version](https://img.shields.io/badge/Python-v_3.10-informational/?style=social&logo=Python)
+####![скачать необходимую версию Python](https://www.python.org/)
+
 ##Скрипт для заполнения форм объявления на сайте [www.gde.ru](https://gde.ru) 
-1. Основной файл для исполнения `new_daemon.py`
+1. Основной файл для исполнения **`new_daemon.py`**
 2. Файл `check_drivers_version.py` для сравнения версий браузера *Google Chrome* и его *драйвера*.
 ####
 3. Драйвера для *Google Chrome*:
