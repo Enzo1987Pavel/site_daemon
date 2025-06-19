@@ -50,7 +50,7 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             timer_value = '1.5'  # если не успевают загрузиться формы, то УВЕЛИЧЬ данное значение (это ожидание загрузки сайта)
             #  Конец ввода переменных
 
-            url_address = "https://n555.ru/"  # Вносим в переменную 'url_address' данный адрес сайта
+            url_address = "https://n555.ru/"  # Вносим в переменную 'url_address' адрес сайта
             webbrowser.open(url_address, new=1)  # Открываем ссылку в браузере в новой вкладке
 
             # Выводим в текст в IDLE о работе функции
@@ -70,26 +70,26 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             driver = webdriver.Chrome(options=options)
 
             # Будем находить поля по ID, имени, XPath или CSS-селектору
-            #  Автоматом входим на сайт
+            # Автоматом входим на сайт
             driver.get("https://n555.ru/users/login/")
 
-            #  ВВОД ЛОГИНА
+            # ВВОД ЛОГИНА
             input_email = driver.find_element(By.ID, "sender-email")
             input_email.send_keys(f"{login_value}")
 
             time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
-            #  ВВОД ПАРОЛЯ
+            # ВВОД ПАРОЛЯ
             input_user_pass = driver.find_element(By.ID, "user-pass")
             input_user_pass.send_keys(f"{password_value}")
 
             time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
-            #  НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
+            # НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
             login_button = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Войти')]")))
             login_button.click()
-            #  Зашли на сайт
+            # Зашли на сайт
 
             time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
@@ -172,9 +172,8 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             input_field_tags = driver.find_element(By.ID, "tagsinput")
             input_field_tags.send_keys(f"{tags_value}")
 
-            #  СОГЛАСИЕ В ПРАВИЛАМИ ПУБЛИКАЦИИ
+            # СОГЛАСИЕ В ПРАВИЛАМИ ПУБЛИКАЦИИ
             checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "rules")))
-            # JavaScript
             driver.execute_script("arguments[0].click();", checkbox)
 
             # АДРЕС (максимальное число символов = 200 !!!)
