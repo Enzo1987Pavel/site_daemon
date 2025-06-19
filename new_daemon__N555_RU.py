@@ -22,26 +22,35 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
     def run():  # Функция для запуска демона и выполнения описанных действий
         try:
 
-            #  Указать названия региона и города, рубрики и подрубрики, цену, телефон, адрес, описание
+            #  Указать названия региона и города, рубрики и подрубрики, цену, телефон, адрес, описание (все должны быть в кавычках!!!!)
             login_value = 'zuclij@dark2web.art'  # твой логин
             password_value = 'pzCLz?!%w$sf{66S'  # твой пароль
 
-            title_value = 'Продам спортинвентарь'
+            title_value = 'Продам спортинвентарь'  # название объявления
 
-            region_value = 'Московская область'
-            city_value = 'Королев'
+            region_value = 'Московская область'  # регион продажи
+            city_value = 'Королев'  # город продажи
 
-            rubrika_value = 'Хобби и отдых'
-            rubrika_1_value = 'Спорт и отдых'
-            rubrika_2_value = 'Фитнес и тренажёры'
+            rubrika_value = 'Хобби и отдых'  # главная рубрика
+            rubrika_1_value = 'Спорт и отдых'  # вторая подрубрика
+            rubrika_2_value = 'Фитнес и тренажёры'  # третья подрубрика
 
-            prise_value = '2900'
+            prise_value = '2900'  # цена продажи
             phone_number_value = '79991234567'  # вводить номер телефона ТОЛЬКО с 'семерки' (7)
 
-            timer_value = '2'
+            address_value = 'Россия, Московская область, Королёв, улица Мичурина, 27/1'  # указывать в таком формате
+
+            conditions = 'не выбрано'  # можно заменить на: 'Новые' или 'Б/у'  (только в таком написании, иначе - ошибка!)
+            tags_value = 'продам спортинвентарь, продажа, спортивный снаряд'  # можно свои добавить еще
+
+            # несли описание не влазит в одну строчку, то нажимай ENTER и автоматически перенесется на новую строку
+            desc_value = 'Продам тренажер в отличном качестве. ТОЛЬКО WhatsApp!!!\n'\
+                         'САМОВЫВОЗ!\nДокументы и чеки в наличии.'
+
+            timer_value = '1.5'  # если не успевают загрузиться формы, то УВЕЛИЧЬ данное значение (это ожидание загрузки сайта)
             #  Конец ввода переменных
 
-            url_address = "https://n555.ru/"  # Берем данный адрес сайта и переходим на него
+            url_address = "https://n555.ru/"  # Вносим в переменную 'url_address' данный адрес сайта
             webbrowser.open(url_address, new=1)  # Открываем ссылку в браузере в новой вкладке
 
             # Выводим в текст в IDLE о работе функции
@@ -64,16 +73,19 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             #  Автоматом входим на сайт
             driver.get("https://n555.ru/users/login/")
 
+            #  ВВОД ЛОГИНА
             input_email = driver.find_element(By.ID, "sender-email")
             input_email.send_keys(f"{login_value}")
 
             time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
+            #  ВВОД ПАРОЛЯ
             input_user_pass = driver.find_element(By.ID, "user-pass")
             input_user_pass.send_keys(f"{password_value}")
 
             time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
+            #  НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
             login_button = WebDriverWait(driver, 10).until(
                 EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Войти')]")))
             login_button.click()
@@ -81,7 +93,7 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
 
             time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
-            # Открываем сайт
+            # ОТКРЫВАЕМ СТРАНИЦУ С ДОБАВЛЕНИЕМ НОВОГО ОБЪЯВЛЕНИЯ
             driver.get("https://n555.ru/add/")
 
             # ЗАГОЛОВОК ОБЪЯВЛЕНИЯ
@@ -119,28 +131,58 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             # Выбираем нужное название подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
             driver.find_element(By.XPATH, f"//option[text()='{rubrika_1_value}']").click()
 
-            time.sleep(2)  # чуток ждем, чтобы успели все события на форме сработать
+            time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
 
             # Находим и кликаем на выпадающий список
             driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
             # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
             driver.find_element(By.XPATH, f"//option[text()='{rubrika_2_value}']").click()
 
-            # Находим поле с ценой товара
+            # ЦЕНА ТОВАРА
             prise = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_39']")))
             # Вводим цену товара
             prise.send_keys(f"{prise_value}")
 
-            # Находим поле с указанием номера телефона
+            # НОМЕР ТЕЛЕФОНА
             phone_number = WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_14']")))
             # Вводим цену товара
             phone_number.send_keys(f"{phone_number_value}")
 
+            # СОСТОЯНИЕ. Ждем и кликаем по метке "не выбрано"
+            WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, f"//label[contains(text(), '{conditions}')]"))).click()
 
+            # ОПИСАНИЕ ОБЪЯВЛЕНИЯ. Переключаемся на форму 'iframe'
+            iframe = WebDriverWait(driver, 10).until(
+                EC.frame_to_be_available_and_switch_to_it((By.CLASS_NAME, "cke_wysiwyg_frame")))
 
+            # Находим поле для ввода текста
+            editor_body = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
+            # Очишаем (на всякий случай) и вставляем заранее готовый текст
+            editor_body.clear()
+            editor_body.send_keys(f"{desc_value}")
+
+            # Возвращаемся на сайт из формы описания
+            driver.switch_to.default_content()
+
+            # ДОБАВЛЯЕМ ТЭГИ
+            input_field_tags = driver.find_element(By.ID, "tagsinput")
+            input_field_tags.send_keys(f"{tags_value}")
+
+            #  СОГЛАСИЕ В ПРАВИЛАМИ ПУБЛИКАЦИИ
+            checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "rules")))
+            # JavaScript
+            driver.execute_script("arguments[0].click();", checkbox)
+
+            # # Находим поле с указанием адреса (максимальное число символов = 200 !!!)
+            # address = WebDriverWait(driver, 10).until(
+            #     EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_3']")))
+            # # Вводим адрес. На сайте можно будет поставить курсор в поле с адресом и появится выпадающий список с адресами,
+            # # из которых можно выбрать правильный и он появится на карте =)
+            # address.send_keys(f"{address_value}")
 
             time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
