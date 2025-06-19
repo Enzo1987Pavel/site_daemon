@@ -1,4 +1,3 @@
-import signal
 import sys
 import time
 import webbrowser
@@ -15,24 +14,39 @@ from selenium.webdriver.chrome.options import Options
 # -----------------------------------------------------
 
 
-class SiteDaemon_N555:  # Создаем класс демона 'SiteDaemon'
+class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
     def __init__(self):
         self.running = True
-        signal.signal(signal.SIGTERM, self.handle_signal)
-        signal.signal(signal.SIGINT, self.handle_signal)
 
-    def handle_signal(self, signum, frame):
-        self.running = False
-
-    def run(self):  # Функция для запуска демона и выполнения описанных действий
+    @staticmethod
+    def run():  # Функция для запуска демона и выполнения описанных действий
         try:
 
-            # !!!!! Добавляем адрес сайта с объявлением (в кавычках. В конце точку не ставить) !!!!!
-            URL_address = "https://n555.ru/"  # Берем данный адрес сайта и переходим на него
-            webbrowser.open(URL_address, new=1)  # Открываем ссылку в браузере в новой вкладке
+            #  Указать названия региона и города, рубрики и подрубрики, цену, телефон, адрес, описание
+            login_value = 'zuclij@dark2web.art'  # твой логин
+            password_value = 'pzCLz?!%w$sf{66S'  # твой пароль
+
+            title_value = 'Продам спортинвентарь'
+
+            region_value = 'Московская область'
+            city_value = 'Королев'
+
+            rubrika_value = 'Хобби и отдых'
+            rubrika_1_value = 'Спорт и отдых'
+            rubrika_2_value = 'Фитнес и тренажёры'
+
+            prise_value = '2900'
+            phone_number_value = '79991234567'  # вводить номер телефона ТОЛЬКО с 'семерки' (7)
+
+            timer_value = '2'
+            #  Конец ввода переменных
+
+            url_address = "https://n555.ru/"  # Берем данный адрес сайта и переходим на него
+            webbrowser.open(url_address, new=1)  # Открываем ссылку в браузере в новой вкладке
 
             # Выводим в текст в IDLE о работе функции
-            print(f"Начало работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-. Переход на сайт: \"{URL_address}\"")
+            print(f"Начало работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-. "
+                  f"Переход на сайт: \"{url_address}\"")
 
             # Путь к папке профиля
             profile_path = os.path.join(os.getenv('APPDATA'), 'Local', 'Google', 'Chrome', 'User Data', 'SeleniumProfile')
@@ -45,125 +59,93 @@ class SiteDaemon_N555:  # Создаем класс демона 'SiteDaemon'
 
             # Создаем драйвер
             driver = webdriver.Chrome(options=options)
-            # Будем находить поля по ID, имени, XPath или CSS-селектору
 
+            # Будем находить поля по ID, имени, XPath или CSS-селектору
+            #  Автоматом входим на сайт
             driver.get("https://n555.ru/users/login/")
 
             input_email = driver.find_element(By.ID, "sender-email")
-            input_email.send_keys("zuclij@dark2web.art")  # Можно поменять текст, который в кавычках
+            input_email.send_keys(f"{login_value}")
+
+            time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
             input_user_pass = driver.find_element(By.ID, "user-pass")
-            input_user_pass.send_keys("pzCLz?!%w$sf{66S")  # Можно поменять текст, который в кавычках
+            input_user_pass.send_keys(f"{password_value}")
 
-            button = driver.find_element(By.CSS_SELECTOR, ".btn-primary")
-            button.click()
+            time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
 
+            login_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Войти')]")))
+            login_button.click()
+            #  Зашли на сайт
+
+            time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
             # Открываем сайт
             driver.get("https://n555.ru/add/")
 
-            # # НОМЕР ТЕЛЕФОНА
-            # input_field_phone = driver.find_element(By.ID, "AInfoForm_phone")
-            # input_field_phone.send_keys("+7 (999) 123-45-67")  # Можно поменять текст, который в кавычках
-
             # ЗАГОЛОВОК ОБЪЯВЛЕНИЯ
             input_field_title = driver.find_element(By.ID, "msgTitle")
-            input_field_title.send_keys("Продаю спортинвентарь")  # Можно поменять текст, который в кавычках
+            input_field_title.send_keys(f"{title_value}")
 
-            # # КАТЕГОРИЯ (основная)
-            # menu_item_1 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            #     (By.XPATH, "//ul[@id='section-menu']//li[contains(text(), 'Спорт и фитнес')]")))  # !!!!!!!!!!!!!!
-            # menu_item_1.click()
-            # selected_text = driver.find_element(By.CSS_SELECTOR, "#section-button .ui-selectmenu-text").text
-            # # Выбор категории_2
-            # menu_item_2 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            #     (By.XPATH, "//ul[@id='ui-id-17-menu']//li[contains(text(), 'Спорттовары')]")))  # !!!!!!!!!!!!!!
-            # menu_item_2.click()
-            # selected_text = driver.find_element(By.CSS_SELECTOR, "#ui-id-17-button .ui-selectmenu-text").text
-            # # Выбор категории_3
-            # menu_item_3 = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            #     (By.XPATH, "//ul[@id='ui-id-26-menu']//li[contains(text(), 'Тренажеры')]")))  # !!!!!!!!!!!!!!
-            # menu_item_3.click()
-            # selected_text = driver.find_element(By.CSS_SELECTOR, "#ui-id-26-button .ui-selectmenu-text").text
-            #
-            # # РЕГИОН
-            # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "Region-button"))).click()
-            # region_menu = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "Region-menu")))
-            #
-            # # Ищем нужную область в меню
-            # try:
-            #     region_option = region_menu.find_element(By.XPATH, ".//li[text()='Московская область и Москва']")
-            #     region_option.click()
-            # except:
-            #     # Если не нашли по точному тексту, пробуем другой вариант (частичное совпадение)
-            #     region_option = region_menu.find_element(By.XPATH, ".//li[contains(text(), 'Московск')]")
-            #     region_option.click()
-            # # Проверка, что выбрано в меню
-            # selected_text = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            #     (By.CSS_SELECTOR, "#Region-button .ui-selectmenu-text"))).text
-            #
-            # # ГОРОД
-            # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "Geo-button"))).click()
-            # city_menu = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "Geo-menu")))
-            # # Ожидание и выбор "Королёв"
-            # city_option = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            #     (By.XPATH, "//ul[@id='Geo-menu']//li[contains(., 'Королёв')]")))
-            # city_option.click()
-            # # Проверка выбора
-            # selected_text_city = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            #     (By.CSS_SELECTOR, "#Geo-button .ui-selectmenu-text"))).text
-            #
-            # # ПОЛНОЕ ОПИСАНИЕ (Сделать описание товара/услуги/вакансии более подробным (лучше > 100 символов))
-            # input_field_desc = driver.find_element(By.ID, "AInfoForm_content")
-            # input_field_desc.send_keys("Продам тренажер в отличном качестве. ТОЛЬКО WhatsApp (8-968-XXX-XX-XX)!!!\n"
-            #                            "САМОВЫВОЗ!\nДокументы и чеки в наличии.")  # Можно поменять текст, который в кавычках
-            #
-            # # ЦЕНА ТОВАРА (Максимальное число символов - 11)
-            # input_field_price = driver.find_element(By.ID, "AInfoForm_price")
-            # input_field_price.send_keys("2900")  # Можно поменять текст, который в кавычках
-            #
-            # # СОГЛАСИЕ НА ТОРГ ПО ЦЕНЕ
-            # # (Устанавливаем состояние чекбокса: в конце строки '.checked = false;' --> true - согласен, false - не согласен)
-            # # (Обновляем связанное скрытое поле --> вторая строка '.value = "1";' --> согласен = 1, не согласен = 0)
-            # # _____ПРИМЕЧАНИЕ____
-            # # 'true' и 'false' - обязательно с МАЛЕНЬКОЙ БУКВЫ и ___БЕЗ__КАВЫЧЕК___!!
-            # # В значении '.value = "X" - цифры "1" и "0" ОБЯЗТЕЛЬНО ___В__КАВЫЧКАХ___!!!
-            # # ВАЖНО!!! в конце каждой строки кода (где нет символов //) ОБЯЗАТЕЛЬНЫЙ ЗНАК ___ТОЧКА С ЗАПЯТОЙ___ (;)!!!
-            # driver.execute_script("""
-            #     // Устанавливаем состояние чекбокса
-            #     document.getElementById("AInfoForm_torg").checked = false;
-            #     // Обновляем связанное скрытое поле
-            #     document.getElementById("ytAInfoForm_torg").value = "0";
-            #     // Триггерим события изменения
-            #     const event = new Event("change", { bubbles: true });
-            #     document.getElementById("AInfoForm_torg").dispatchEvent(event);
-            # """)
-            # time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
-            #
-            # # АДРЕС (Максимальное число символов - 80)
-            # input_field_address = driver.find_element(By.ID, "AInfoForm_address")
-            # input_field_address.send_keys("ул. Орджоникидзе, д. 1")  # Можно поменять текст, который в кавычках
-            #
-            # # СОГЛАСИЕ НА ОБРАБОТКУ ПД
-            # # (Обновляем скрытое поле --> часть кода и в конце '.value = "X";' --> согласен = 1, не согласен = 0)
-            # # _____ПРИМЕЧАНИЕ____
-            # # В значении '.value ="X" - цифры "1" и "0" ОБЯЗТЕЛЬНО ___В__КАВЫЧКАХ___!!!
-            # # ВАЖНО!!! в конце каждой строки кода (где нет символов //) ОБЯЗАТЕЛЬНЫЙ ЗНАК ___ТОЧКА С ЗАПЯТОЙ___ (;)!!!
-            # driver.execute_script("""
-            #     document.getElementById("AInfoForm_is_agree").checked = true;
-            #     // Триггерим события для обновления состояния
-            #     const event = new Event("change", { bubbles: true });
-            #     document.getElementById('AInfoForm_is_agree').dispatchEvent(event);
-            #     // Обновляем скрытое поле
-            #     document.getElementById("ytAInfoForm_is_agree").value = "0";
-            # """)
+            time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
+
+            # РЕГИОН
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название региона (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{region_value}']").click()
+
+            time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+
+            # ГОРОД
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название города (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{city_value}']").click()
+
+            time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
+
+            # РУБРИКА
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название рубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_value}']").click()
+
+            time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_1_value}']").click()
+
+            time.sleep(2)  # чуток ждем, чтобы успели все события на форме сработать
+
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_2_value}']").click()
+
+            # Находим поле с ценой товара
+            prise = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_39']")))
+            # Вводим цену товара
+            prise.send_keys(f"{prise_value}")
+
+            # Находим поле с указанием номера телефона
+            phone_number = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_14']")))
+            # Вводим цену товара
+            phone_number.send_keys(f"{phone_number_value}")
+
+
+
+
+
             time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
             # Выводим в текст в IDLE о работе функции
             print(f"Окончание работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-")
-
-            while True:  # не закрываем браузер автоматически
-                time.sleep(1)
 
         except Exception as e:  # описание ошибки, если она возникает
             print(f"Error: {e}", file=sys.stderr)
@@ -171,6 +153,5 @@ class SiteDaemon_N555:  # Создаем класс демона 'SiteDaemon'
 
 
 if __name__ == "__main__":  # запуск скрипта
-    daemon = SiteDaemon_N555()  # создаем экземпляр класса демона 'SiteDaemon_N555()'
+    daemon = SiteDaemonN555()  # создаем экземпляр класса демона 'SiteDaemonN555()'
     daemon.run()  # запускаем демона, который выполняет функцию 'def run'
-
