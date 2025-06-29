@@ -23,8 +23,8 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
         try:
             #  Начало ввода переменных
             #  Названия региона и города, рубрики и подрубрики, цену, телефон, адрес, описание (все должны быть в кавычках!!!)
-            login_value = 'zuclij@dark2web.art'  # твой логин
-            password_value = 'pzCLz?!%w$sf{66S'  # твой пароль
+            login_value = 'mipnep@ligue-games.art'  # твой логин
+            password_value = 'GGxRCSXS68YRJKo'  # твой пароль
 
             title_value = 'Продам спортинвентарь'  # название объявления
 
@@ -83,7 +83,7 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             input_user_pass = driver.find_element(By.ID, "user-pass")
             input_user_pass.send_keys(f"{password_value}")
 
-            time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
+            time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
 
             # НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
             login_button = WebDriverWait(driver, 10).until(
