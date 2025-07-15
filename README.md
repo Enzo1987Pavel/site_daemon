@@ -3,8 +3,8 @@
 [![version](https://img.shields.io/badge/Python-v_3.10-informational/?style=social&logo=Python)](https://python.org)
 
 ### Скрипт для заполнения форм объявления на сайтах бесплатных объсвлений:
-- ####[www.gde.ru](https://gde.ru) 
-- ####[www.n555.ru](https://n555.ru)
+- #### [www.gde.ru](https://gde.ru) 
+- #### [www.n555.ru](https://n555.ru)
 ---
 1. Основной файл для исполнения **`new_daemon.py`**
 2. Файл `check_drivers_version.py` для сравнения версий браузера *Google Chrome* и его *драйвера*.
