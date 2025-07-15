@@ -34,6 +34,8 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             rubrika_value = 'Хобби и отдых'  # главная рубрика
             rubrika_1_value = 'Спорт и отдых'  # вторая подрубрика
             rubrika_2_value = 'Фитнес и тренажёры'  # третья подрубрика
+            rubrika_3_value = 'Силовые тренажёры и инвентарь'  # четвертая подрубрика
+            rubrika_4_value = 'Тренажёры'  # пятая подрубрика
 
             prise_value = '2900'  # цена продажи
             phone_number_value = '79991234567'  # вводить номер телефона ТОЛЬКО с 'семерки' (7)
@@ -137,6 +139,20 @@ class SiteDaemonN555:  # Создаем класс демона 'SiteDaemonN555'
             driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
             # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
             driver.find_element(By.XPATH, f"//option[text()='{rubrika_2_value}']").click()
+
+            time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_3_value}']").click()
+
+            time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+
+            # Находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
+            # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_4_value}']").click()
 
             # ЦЕНА ТОВАРА
             prise = WebDriverWait(driver, 10).until(
