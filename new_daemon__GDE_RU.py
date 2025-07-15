@@ -150,8 +150,8 @@ class SiteDaemon:  # Создаем класс демона 'SiteDaemon'
             # Выводим в текст в IDLE о работе функции
             print(f"Окончание работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-")
 
-            while True:  # не закрываем браузер автоматически
-                time.sleep(1)
+            # while True:  # не закрываем браузер автоматически
+            #     time.sleep(1)
 
         except Exception as e:  # описание ошибки, если она возникает
             print(f"Error: {e}", file=sys.stderr)
