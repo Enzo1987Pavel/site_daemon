@@ -5,6 +5,7 @@
 ### Скрипт для заполнения форм объявления на сайтах бесплатных объсвлений:
 - #### [www.gde.ru](https://gde.ru) 
 - #### [www.n555.ru](https://n555.ru)
+- #### [www.rudos.ru](https://rudos.ru)
 ---
 1. Основной файл для исполнения **`new_daemon.py`**
 2. Файл `check_drivers_version.py` для сравнения версий браузера *Google Chrome* и его *драйвера*.
