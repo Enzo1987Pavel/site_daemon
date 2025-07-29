@@ -28,3 +28,7 @@ pip freeze > requirements.txt
 ```sh
 pip install -r requirements.txt
 ```
+Удаление каталога из репозитория (это подсказка для меня):
+```sh
+git rm -r --cached .idea/
+```
