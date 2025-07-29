@@ -41,8 +41,8 @@ class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RU
             region_value = 'Московская область'  # регион продажи
             city_value = 'Королев'  # город продажи
 
-            user_value = "Твое имя или имя из профиля"  # максимум 24 символа
-            phone_number_value = '9991234567'  # вводи свой номер телефона БЕЗ 'семерки' (7)
+            # user_value = "Твое имя или имя из профиля"  # максимум 24 символа
+            # phone_number_value = '9991234567'  # вводи свой номер телефона БЕЗ 'семерки' (7)
 
             address_value = f'Россия, {region_value}, {city_value}, улица Мичурина, 27/1'  # указывать в таком формате (без сокращений)
 
@@ -50,7 +50,7 @@ class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RU
             #  Конец ввода переменных
 
             url_address = "https://rudos.ru/"  # Вносим в переменную 'url_address' адрес сайта
-            webbrowser.open(url_address, new=1)  # Открываем ссылку в браузере в новой вкладке
+            # webbrowser.open(url_address, new=1)  # Открываем ссылку в браузере в новой вкладке
 
             # Выводим в текст в IDLE о работе функции
             print(f"Начало работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-. "
@@ -69,31 +69,29 @@ class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RU
             driver = webdriver.Chrome(options=options)
 
             # Будем находить поля по ID, имени, XPath или CSS-селектору
-            # Автоматом входим на сайт
-            # driver.get("https://rudos.ru/registr/enter/")
-            #
-            # # ВВОД ЛОГИНА
-            # input_email = driver.find_element(By.NAME, "email")
-            # input_email.send_keys(f"{login_value}")
-            #
-            # time.sleep(0.2)  # чуток ждем, чтобы на форме успели сработать все события
-            #
-            # # ВВОД ПАРОЛЯ
-            # input_user_pass = driver.find_element(By.NAME, "password_user")
-            # input_user_pass.send_keys(f"{password_value}")
-            #
-            # time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
-            #
-            # # НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
-            # login_button = WebDriverWait(driver, 10).until(
-            #     EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Войти')]")))
-            # login_button.click()
-            # Зашли на сайт
-            #
-            # time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
-            #
+            driver.get("https://rudos.ru/registr/enter/")
+
+            # ВВОД ЛОГИНА
+            input_email = driver.find_element(By.NAME, "email")
+            input_email.send_keys(f"{login_value}")
+
+            time.sleep(0.2)  # чуток ждем, чтобы на форме успели сработать все события
+
+            # ВВОД ПАРОЛЯ
+            input_user_pass = driver.find_element(By.NAME, "password_user")
+            input_user_pass.send_keys(f"{password_value}")
+
+            # СНИМАЕМ ГАЛОЧКУ "ЗАПОМНИТЬ МЕНЯ"
+            checkbox_remember = driver.find_element(By.ID, "memory_authoriz")
+            if checkbox_remember.is_selected():  #  gроверяем, отмечен ли чекбокс
+                checkbox_remember.click()  #  cнимаем галочку
+
+            time.sleep(15)  #  ждем, чтобы ты мог ввести код (captcha). Если не успеваешь или медленная скорость соедиения - увеличь значение в скобках!
+
             # ОТКРЫВАЕМ СТРАНИЦУ С ДОБАВЛЕНИЕМ НОВОГО ОБЪЯВЛЕНИЯ
-            driver.get("https://rudos.ru/newadv/")
+            url_address_adv = "https://rudos.ru/newadv/"
+            driver.get(f"{url_address_adv}")
+            print(f"Переход на страницу объявления в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-")
 
             # ЗАГОЛОВОК ОБЪЯВЛЕНИЯ
             input_field_title = driver.find_element(By.NAME, "name_adv")
@@ -146,15 +144,15 @@ class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RU
 
             time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
 
-            # ВАШЕ ИМЯ (имя пользователя автоматически берется из профиля, но можно поменять)
-            name_user = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, "name_user")))
-            # Вводим имя продавца
-            name_user.send_keys(f"{user_value}")
-
-            # НОМЕР ТЕЛЕФОНА
-            phone_number = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, "phone")))
-            # Вводим номер телефона
-            phone_number.send_keys(f"{phone_number_value}")
+            # # ВАШЕ ИМЯ (имя пользователя автоматически берется из профиля, но можно поменять)
+            # name_user = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, "name_user")))
+            # # Вводим имя продавца
+            # name_user.send_keys(f"{user_value}")
+            #
+            # # НОМЕР ТЕЛЕФОНА
+            # phone_number = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, "phone")))
+            # # Вводим номер телефона
+            # phone_number.send_keys(f"{phone_number_value}")
 
             # МЕСТО ОКАЗАНИЯ УСЛУГ (откроется карта)
             map_button = WebDriverWait(driver, 5).until(
