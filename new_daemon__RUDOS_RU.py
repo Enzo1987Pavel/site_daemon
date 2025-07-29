@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options
 # -----------------------------------------------------
 
 
-class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDOS'
+class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RUDOS'
     def __init__(self):
         self.running = True
 
@@ -26,30 +26,27 @@ class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDO
             login_value = 'ciklak@ligue-games.art'  # твой логин
             password_value = 'nn^f8TR4Hr'  # твой пароль
 
-            title_value = 'Продам спортинвентарь'  # название объявления
+            title_value = 'Продам спортинвентарь'  # заголовок объявления
 
-            region_value = 'Московская область'  # регион продажи
-            city_value = 'Королев'  # город продажи
-
-            rubrika_value = 'Хобби и отдых'  # главная рубрика
-            rubrika_1_value = 'Спорт и отдых'  # вторая подрубрика
-            rubrika_2_value = 'Фитнес и тренажёры'  # третья подрубрика
-            rubrika_3_value = 'Силовые тренажёры и инвентарь'  # четвертая подрубрика
-            rubrika_4_value = 'Тренажёры'  # пятая подрубрика
+            rubrika_value = 'Хобби и отдых'  # главная категория
+            rubrika_1_value = 'Спорт и отдых'  # вторая категория
+            rubrika_2_value = 'Фитнес и тренажёры'  # третья категория
 
             prise_value = '2900'  # цена продажи
-            phone_number_value = '79991234567'  # вводить номер телефона ТОЛЬКО с 'семерки' (7)
-
-            address_value = 'Россия, Московская область, Королёв, улица Мичурина, 27/1'  # указывать в таком формате (без сокращений)
-
-            conditions = 'не выбрано'  # можно заменить на: 'Новые' или 'Б/у'  (только в таком написании, иначе - ошибка!)
-            tags_value = 'продам спортинвентарь, продажа, спортивный снаряд'  # можно свои добавить еще
 
             # Если ОПИСАНИЕ ОБЪЯВЛЕНИЯ не влазит в одну строчку, то нажимай ENTER и автоматически перенесется на новую строку
             desc_value = 'Продам тренажер в отличном качестве. ТОЛЬКО WhatsApp!!!\n' \
                          'САМОВЫВОЗ!\nДокументы и чеки в наличии.'
 
-            timer_value = '1.5'  # (в секундах) если не успевают загрузиться формы, то УВЕЛИЧЬ данное значение (это ожидание загрузки сайта)
+            region_value = 'Московская область'  # регион продажи
+            city_value = 'Королев'  # город продажи
+
+            user_value = "Твое имя или имя из профиля"  # максимум 24 символа
+            phone_number_value = '9991234567'  # вводи свой номер телефона БЕЗ 'семерки' (7)
+
+            address_value = f'Россия, {region_value}, {city_value}, улица Мичурина, 27/1'  # указывать в таком формате (без сокращений)
+
+            timer_value = '1.2'  # (в секундах) если не успевают загрузиться формы, то УВЕЛИЧЬ данное значение (это ожидание загрузки сайта)
             #  Конец ввода переменных
 
             url_address = "https://rudos.ru/"  # Вносим в переменную 'url_address' адрес сайта
@@ -79,13 +76,13 @@ class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDO
             # input_email = driver.find_element(By.NAME, "email")
             # input_email.send_keys(f"{login_value}")
             #
-            # time.sleep(0.2)  # чуток ждем, чтобы успели все события на форме сработать
+            # time.sleep(0.2)  # чуток ждем, чтобы на форме успели сработать все события
             #
             # # ВВОД ПАРОЛЯ
             # input_user_pass = driver.find_element(By.NAME, "password_user")
             # input_user_pass.send_keys(f"{password_value}")
             #
-            # time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
+            # time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
             #
             # # НАЖИМАЕМ КНОПКУ ДЛЯ АУТЕНТИФИКАЦИИ НА САЙТЕ
             # login_button = WebDriverWait(driver, 10).until(
@@ -93,7 +90,7 @@ class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDO
             # login_button.click()
             # Зашли на сайт
             #
-            # time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
+            # time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
             #
             # ОТКРЫВАЕМ СТРАНИЦУ С ДОБАВЛЕНИЕМ НОВОГО ОБЪЯВЛЕНИЯ
             driver.get("https://rudos.ru/newadv/")
@@ -102,104 +99,75 @@ class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDO
             input_field_title = driver.find_element(By.NAME, "name_adv")
             input_field_title.send_keys(f"{title_value}")
 
-            time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
-
-            # # РЕГИОН
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
-            # # Выбираем нужное название региона (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//option[text()='{region_value}']").click()
-            #
-            # time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
-            #
-            # # ГОРОД
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
-            # # Выбираем нужное название города (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//option[text()='{city_value}']").click()
-            #
-            # time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
-            #
-            # РУБРИКА
-            # Находим и кликаем на выпадающий список
+            # КАТЕГОРИЯ
+            # находим и кликаем на выпадающий список
             driver.find_element(By.CSS_SELECTOR, ".jq-selectbox__select").click()
             # Выбираем нужное название рубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            driver.find_element(By.XPATH, f"//li[contains(text(), '{rubrika_value}')]").click()
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_value}']").click()
 
-            # time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+            time.sleep(float(timer_value))  # чуток ждем, чтобы на форме успели сработать все события
 
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, ".jq-selectbox jqselect").click()
-            # # Выбираем нужное название подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//li[contains(text(), {rubrika_1_value})]").click()
-            #
-            # time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
+            # ВТОРАЯ КАТЕГОРИЯ
+            # находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, ".jq-selectbox__select").click()
+            # Выбираем нужное название подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_1_value}']").click()
 
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
-            # # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//option[text()='{rubrika_2_value}']").click()
-            #
-            # time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
-            #
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
-            # # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//option[text()='{rubrika_3_value}']").click()
-            #
-            # time.sleep(float(timer_value))  # чуток ждем, чтобы успели все события на форме сработать
-            #
-            # # Находим и кликаем на выпадающий список
-            # driver.find_element(By.CSS_SELECTOR, "div.multiselect").click()
-            # # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
-            # driver.find_element(By.XPATH, f"//option[text()='{rubrika_4_value}']").click()
-            #
-            # # ЦЕНА ТОВАРА
-            # prise = WebDriverWait(driver, 10).until(
-            #     EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_39']")))
-            # # Вводим цену товара
-            # prise.send_keys(f"{prise_value}")
-            #
-            # # НОМЕР ТЕЛЕФОНА
-            # phone_number = WebDriverWait(driver, 10).until(
-            #     EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_14']")))
-            # # Вводим цену товара
-            # phone_number.send_keys(f"{phone_number_value}")
-            #
-            # # СОСТОЯНИЕ. Ждем и кликаем по метке "не выбрано"
-            # WebDriverWait(driver, 10).until(
-            #     EC.element_to_be_clickable((By.XPATH, f"//label[contains(text(), '{conditions}')]"))).click()
-            #
-            # # ОПИСАНИЕ ОБЪЯВЛЕНИЯ. Переключаемся на форму 'iframe'
-            # iframe = WebDriverWait(driver, 10).until(
-            #     EC.frame_to_be_available_and_switch_to_it((By.CLASS_NAME, "cke_wysiwyg_frame")))
-            #
-            # # Находим поле для ввода текста
-            # editor_body = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-            #
-            # # Очишаем (на всякий случай) и вставляем заранее готовый текст
-            # editor_body.clear()
-            # editor_body.send_keys(f"{desc_value}")
-            #
-            # # Возвращаемся на сайт из формы описания
-            # driver.switch_to.default_content()
-            #
-            # # ДОБАВЛЯЕМ ТЭГИ
-            # input_field_tags = driver.find_element(By.ID, "tagsinput")
-            # input_field_tags.send_keys(f"{tags_value}")
-            #
-            # # СОГЛАСИЕ В ПРАВИЛАМИ ПУБЛИКАЦИИ
-            # checkbox = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "rules")))
-            # driver.execute_script("arguments[0].click();", checkbox)
-            #
-            # # АДРЕС (максимальное число символов = 200 !!!)
-            # address = WebDriverWait(driver, 10).until(
-            #     EC.presence_of_element_located((By.CSS_SELECTOR, "input[name='f_3']")))
-            # # Вводим адрес. На сайте можно будет поставить курсор в поле с адресом и появится выпадающий список с адресами,
-            # # из которых можно выбрать правильный и он появится на карте =)
-            # address.send_keys(f"{address_value}")
-            #
-            # time.sleep(0.5)  # чуток ждем, чтобы успели все события на форме сработать
+            time.sleep(float(timer_value))  # чуток ждем, чтобы на форме успели сработать все события
+
+            # ТРЕТЬЯ КАТЕГОРИЯ
+            # находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, ".jq-selectbox__select").click()
+            # Выбираем нужное название под-подрубрики (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{rubrika_2_value}']").click()
+
+            # ЦЕНА ТОВАРА
+            prise = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, "cost")))
+            # Вводим цену товара
+            prise.send_keys(f"{prise_value}")
+
+            # ТЕКСТ ОБЪЯВЛЕНИЯ (максимум 4000 символов !!!)
+            input_field_title = driver.find_element(By.NAME, "text_adv")
+            input_field_title.send_keys(f"{desc_value}")
+
+            # РЕГИОН
+            # находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, ".jq-selectbox__select").click()
+            # Выбираем нужное название региона (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{region_value}']").click()
+
+            time.sleep(float(timer_value))  # чуток ждем, чтобы на форме успели сработать все события
+
+            # ГОРОД
+            # находим и кликаем на выпадающий список
+            driver.find_element(By.CSS_SELECTOR, ".jq-selectbox__select").click()
+            # Выбираем нужное название города (должно быть как на сайте) !!!!!!!!!!!!!!!!
+            driver.find_element(By.XPATH, f"//option[text()='{city_value}']").click()
+
+            time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
+
+            # ВАШЕ ИМЯ (имя пользователя автоматически берется из профиля, но можно поменять)
+            name_user = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, "name_user")))
+            # Вводим имя продавца
+            name_user.send_keys(f"{user_value}")
+
+            # НОМЕР ТЕЛЕФОНА
+            phone_number = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, "phone")))
+            # Вводим номер телефона
+            phone_number.send_keys(f"{phone_number_value}")
+
+            # МЕСТО ОКАЗАНИЯ УСЛУГ (откроется карта)
+            map_button = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Место оказания услуг')]")))
+            map_button.click()
+
+            # АДРЕС СДЕЛКИ
+            address = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, "address")))
+            # Вводим адрес
+            address.send_keys(f"{address_value}")
+
+            time.sleep(0.5)  # чуток ждем, чтобы на форме успели сработать все события
 
             # Выводим в текст в IDLE о работе функции
             print(f"Окончание работы скрипта в -= {time.strftime('%a %d.%m.%Y %H:%M:%S')} =-")
@@ -210,5 +178,5 @@ class SiteDaemonRUDOS:  # Создаем класс демона 'SiteDaemonRUDO
 
 
 if __name__ == "__main__":  # запуск скрипта
-    daemon = SiteDaemonRUDOS()  # создаем экземпляр класса демона 'SiteDaemonRUDOS()'
+    daemon = SiteDaemon_RUDOS()  # создаем экземпляр класса демона 'SiteDaemon_RUDOS()'
     daemon.run()  # запускаем демона, который выполняет функцию 'def run'
