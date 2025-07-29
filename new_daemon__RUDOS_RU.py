@@ -83,10 +83,10 @@ class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RU
 
             # СНИМАЕМ ГАЛОЧКУ "ЗАПОМНИТЬ МЕНЯ"
             checkbox_remember = driver.find_element(By.ID, "memory_authoriz")
-            if checkbox_remember.is_selected():  #  gроверяем, отмечен ли чекбокс
-                checkbox_remember.click()  #  cнимаем галочку
+            if checkbox_remember.is_selected():  # проверяем, отмечен ли чекбокс
+                checkbox_remember.click()  # cнимаем галочку
 
-            time.sleep(15)  #  ждем, чтобы ты мог ввести код (captcha). Если не успеваешь или медленная скорость соедиения - увеличь значение в скобках!
+            time.sleep(15)  # ждем, чтобы ты мог ввести код (captcha). Если не успеваешь или медленная скорость соедиения - увеличь значение в скобках!
 
             # ОТКРЫВАЕМ СТРАНИЦУ С ДОБАВЛЕНИЕМ НОВОГО ОБЪЯВЛЕНИЯ
             url_address_adv = "https://rudos.ru/newadv/"
