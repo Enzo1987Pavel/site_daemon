@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options
 # -----------------------------------------------------
 
 
-class SiteDaemon_RUDOS:  # Создаем класс демона 'SiteDaemon_RUDOS'
+class SiteDaemon_RUDOS:  #  Создаем класс демона 'SiteDaemon_RUDOS'
     def __init__(self):
         self.running = True
 
